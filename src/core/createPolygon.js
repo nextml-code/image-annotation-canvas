@@ -1,10 +1,9 @@
 import { v4 as uuid } from "uuid";
 
-const createPolygon = ({ type = undefined }) => ({
+const createPolygon = () => ({
   id: uuid(),
   coordinates: [],
   visible: true,
-  type,
 });
 
 export default createPolygon;

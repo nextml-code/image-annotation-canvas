@@ -1,5 +1,6 @@
 import modifyActiveAnnotation from "../../core/modifyActiveAnnotation";
 import getActiveAnnotation from "../../core/getActiveAnnotation";
+import createBoundingBox from "../../core/createBoundingBox";
 
 const getNextSelectedPoint = (state) => {
   const activeAnnotation = getActiveAnnotation(state);
@@ -23,12 +24,16 @@ const getNextSelectedPoint = (state) => {
 const removeSelectedPoint = (state) => ({
   ...state,
   selectedPoint: getNextSelectedPoint(state),
-  annotations: modifyActiveAnnotation(state, (activeAnnotation) => ({
-    ...activeAnnotation,
-    coordinates: activeAnnotation.coordinates.filter(
+  annotations: modifyActiveAnnotation(state, (activeAnnotation) => {
+    const nextCoordinates = activeAnnotation.coordinates.filter(
       (point) => point.id !== state.selectedPoint,
-    ),
-  })),
+    );
+    return {
+      ...activeAnnotation,
+      coordinates: nextCoordinates,
+      bbox: createBoundingBox(nextCoordinates),
+    };
+  }),
 });
 
 export default removeSelectedPoint;

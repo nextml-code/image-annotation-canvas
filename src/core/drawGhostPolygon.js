@@ -13,27 +13,31 @@ const condition = (state) => {
     return false;
   }
 
-  return and([activeAnnotation.coordinates.length > 1, state.showGhostPolygon]);
+  return and([activeAnnotation.coordinates.length > 0, state.showGhostPolygon]);
 };
 
 const createGhostPolygon = (state) => {
   const activeAnnotation = getActiveAnnotation(state);
-  if (activeAnnotation.type === BOUNDING_BOX) {
-    return {
-      type: BOUNDING_BOX,
-      bbox: createBoundingBox([
-        ...activeAnnotation.coordinates,
-        getRelativeCoordinate(state.canvasDimensions, state.mousePosition),
-      ]),
-      visible: true,
-    };
-  }
+  // if (activeAnnotation.type === BOUNDING_BOX) {
+  //   return {
+  //     type: BOUNDING_BOX,
+  //     bbox: createBoundingBox([
+  //       ...activeAnnotation.coordinates,
+  //       getRelativeCoordinate(state.canvasDimensions, state.mousePosition),
+  //     ]),
+  //     visible: true,
+  //   };
+  // }
   return {
     coordinates: [
       activeAnnotation.coordinates[0],
       last(activeAnnotation.coordinates),
       getRelativeCoordinate(state.canvasDimensions, state.mousePosition),
     ],
+    bbox: createBoundingBox([
+      ...activeAnnotation.coordinates,
+      getRelativeCoordinate(state.canvasDimensions, state.mousePosition),
+    ]),
     visible: true,
   };
 };
