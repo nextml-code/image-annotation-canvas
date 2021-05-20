@@ -1,10 +1,8 @@
 import last from "@codewell/last";
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import { v4 as uuid } from "uuid";
 import Canvas, { initialState, reducer, actions } from "..";
-
-const imageSource =
-  "https://cdn.mos.cms.futurecdn.net/LTgdH3aE3sitD5Hwvf7Nym-1200-80.jpg";
+import { exampleurl } from "./mockdata.js";
 
 const annotations = [];
 
@@ -44,7 +42,7 @@ const Template = () => {
 
   return (
     <div>
-      <Canvas imageSource={imageSource} state={state} dispatch={dispatch} />
+      <Canvas imageSource={exampleurl} state={state} dispatch={dispatch} />
       <button
         type="button"
         onClick={() => {
