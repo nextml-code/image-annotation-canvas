@@ -2,28 +2,24 @@ import { SET_CURSOR } from "../store/actionTypes";
 import { DEFAULT_CURSOR, GRABBING_CURSOR, POINTER_CURSOR } from "./cursorTypes";
 
 const updateCursor = (state) => {
-  const { hoveredPoints, mouseIsDown, resizing } = state;
+  const { hoveredPoints, mouseIsDown } = state;
 
-  if (mouseIsDown) {
-    if (resizing) {
+  if (hoveredPoints.length > 0) {
+    if (mouseIsDown) {
       return {
         type: SET_CURSOR,
         payload: GRABBING_CURSOR,
       };
     }
-  } else if (hoveredPoints.length > 0) {
     return {
       type: SET_CURSOR,
       payload: POINTER_CURSOR,
     };
-  } else {
-    return {
-      type: SET_CURSOR,
-      payload: DEFAULT_CURSOR,
-    };
   }
-
-  return null;
+  return {
+    type: SET_CURSOR,
+    payload: DEFAULT_CURSOR,
+  };
 };
 
 export default updateCursor;

@@ -4,15 +4,13 @@ import {
   SET_MOUSE_IS_DOWN,
   ADD_POLYGON_COORDINATE,
   SELECT_POINT,
-  SET_CURSOR,
   INITIATE_ANNOTATION,
   COMBINE,
 } from "../store/actionTypes";
 import createPolygon from "./createPolygon";
-import { GRABBING_CURSOR } from "./cursorTypes";
 
 const getActions = (state, mousePosition) => {
-  const { activeAnnotationId, hoveredPoints, resizing } = state;
+  const { activeAnnotationId, hoveredPoints } = state;
 
   if (activeAnnotationId === null) {
     return [
@@ -26,43 +24,22 @@ const getActions = (state, mousePosition) => {
       },
     ];
   }
+
   if (isEmpty(hoveredPoints)) {
-    return resizing
-      ? [
-          {
-            type: ADD_POLYGON_COORDINATE,
-            payload: mousePosition,
-          },
-          {
-            type: SET_CURSOR,
-            payload: GRABBING_CURSOR,
-          },
-        ]
-      : [
-          {
-            type: ADD_POLYGON_COORDINATE,
-            payload: mousePosition,
-          },
-        ];
+    return [
+      {
+        type: ADD_POLYGON_COORDINATE,
+        payload: mousePosition,
+      },
+    ];
   }
 
-  return resizing
-    ? [
-        {
-          type: SELECT_POINT,
-          payload: hoveredPoints[0],
-        },
-        {
-          type: SET_CURSOR,
-          payload: GRABBING_CURSOR,
-        },
-      ]
-    : [
-        {
-          type: SELECT_POINT,
-          payload: hoveredPoints[0],
-        },
-      ];
+  return [
+    {
+      type: SELECT_POINT,
+      payload: hoveredPoints[0],
+    },
+  ];
 };
 
 const mouseDown = (state, dispatch, event) => {
