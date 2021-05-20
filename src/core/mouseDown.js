@@ -18,7 +18,7 @@ const getActions = (state, mousePosition) => {
     return [
       {
         type: INITIATE_ANNOTATION,
-        payload: createPolygon({ type: state.options.polygonType }),
+        payload: createPolygon(),
       },
       {
         type: ADD_POLYGON_COORDINATE,

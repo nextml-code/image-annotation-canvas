@@ -24,7 +24,7 @@ const boundingBoxToPloygon = ({ x, y, width, height }) => [
 const Template = () => {
   const [state, dispatch] = useReducer(reducer("DEBUG"), {
     ...initialState,
-    options: { polygonType: "BOUNDING_BOX" },
+    options: { displayBoundingBox: true },
   });
 
   const canvasActions = actions(state, dispatch);
@@ -48,7 +48,7 @@ const Template = () => {
       <button
         type="button"
         onClick={() => {
-          canvasActions.annotations.select(state.annotations[0].id);
+          canvasActions.annotation.select(state.annotations[0].id);
         }}
       >
         Select first annotation
@@ -56,7 +56,7 @@ const Template = () => {
       <button
         type="button"
         onClick={() => {
-          canvasActions.annotations.delete(last(state.annotations).id);
+          canvasActions.annotation.delete(last(state.annotations).id);
         }}
       >
         Remove last annotation
@@ -64,7 +64,7 @@ const Template = () => {
       <button
         type="button"
         onClick={() => {
-          canvasActions.annotations.update({
+          canvasActions.annotation.update({
             id: state.annotations[0].id,
           });
         }}
