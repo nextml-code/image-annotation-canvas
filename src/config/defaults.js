@@ -9,9 +9,16 @@ export const defaultKeyMap = {
 };
 
 export const defaultUIColors = [
-  "#2ecc71",
-  "#3498db",
-  "#e74c3c",
-  "#e67e22",
-  "#8e44ad",
+  "#364B9A",
+  "#4A7BB7",
+  "#6EA6CD",
+  "#98CAE1",
+  "#C2E4EF",
+  "#EAECCC",
+  "#FEDA8B",
+  "#FDB366",
+  "#F67EFB",
+  "#FFFFFF",
+  "#DD3D2D",
+  "#A50026",
 ];
