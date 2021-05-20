@@ -1,7 +1,6 @@
 import isDefined from "@codewell/is-defined";
 import updateHoveredPoints from "./updateHoveredPoints";
 import updateCursor from "./updateCursor";
-import autoAddPoint from "./autoAddPoint";
 import {
   SET_MOUSE_POSITION,
   REPLACE_POINT,
@@ -10,13 +9,8 @@ import {
 import getRelativeCoordinate from "./getRelativeCoordinate";
 
 const getAction = (state, mousePosition) => {
-  const {
-    activeAnnotationId,
-    mouseIsDown,
-    selectedPoint,
-    resizing,
-    canvasDimensions,
-  } = state;
+  const { activeAnnotationId, mouseIsDown, selectedPoint, canvasDimensions } =
+    state;
 
   if (activeAnnotationId === null) {
     return {
@@ -25,7 +19,7 @@ const getAction = (state, mousePosition) => {
     };
   }
 
-  if (mouseIsDown && resizing) {
+  if (mouseIsDown) {
     return {
       type: REPLACE_POINT,
       payload: {
@@ -49,7 +43,6 @@ const mouseMove = (state, dispatch, mousePosition) =>
       getAction(state, mousePosition),
       updateHoveredPoints(state, mousePosition),
       updateCursor(state),
-      autoAddPoint(state, mousePosition),
     ].filter(isDefined),
   });
 
