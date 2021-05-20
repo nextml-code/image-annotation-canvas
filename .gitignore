@@ -4,3 +4,4 @@ node_modules
 .npmrc
 lib
 
+*mockdata.js
