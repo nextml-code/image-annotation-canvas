@@ -7,7 +7,7 @@ import drawGhostPolygon from "../core/drawGhostPolygon";
 import drawHoveredPoints from "../core/drawHoveredPoints";
 import drawSelectedPoint from "../core/drawSelectedPoint";
 
-const useCanvasRenderUpdate = (state, canvas) => {
+const useCanvasRenderUpdate = (state, canvas, allowEdit) => {
   const { activeAnotationId, image } = state;
 
   const redrawCanvas = () => {
@@ -17,13 +17,17 @@ const useCanvasRenderUpdate = (state, canvas) => {
       drawPolygons(canvas, state);
       drawActiveAnnotationCoordinates(canvas, state);
       drawHoveredPoints(canvas, state);
-      drawGhostPolygon(canvas, state);
       drawSelectedPoint(canvas, state);
+
+      if (allowEdit) {
+        drawGhostPolygon(canvas, state);
+      }
     } catch (error) {
       console.error("Failed to redraw canvas:\n");
       console.error(error);
     }
   };
+
   useEffect(() => {
     if (![canvas, image].includes(null)) {
       redrawCanvas();

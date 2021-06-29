@@ -8,10 +8,10 @@ import MetaCanvas from "./MetaCanvas";
 import onCanvasInit from "../core/onCanvasInit";
 import useImageLoader from "../hooks/useImageLoader";
 
-const CanvasView = ({ imageSource }) => {
+const CanvasView = ({ imageSource, allowEdit }) => {
   const { state, dispatch } = useContext(CanvasContext);
   const [canvas, setCanvas] = useState(null);
-  useCanvasRenderUpdate(state, canvas);
+  useCanvasRenderUpdate(state, canvas, allowEdit);
   useImageLoader(imageSource);
 
   return (
@@ -19,7 +19,7 @@ const CanvasView = ({ imageSource }) => {
       <MetaCanvas />
       <Canvas
         onInit={onCanvasInit(setCanvas)}
-        onEvent={canvasEngine(state, dispatch)}
+        onEvent={canvasEngine(state, dispatch, allowEdit)}
         cursor={state.cursor}
         dimensions={state.canvasDimensions}
       />
@@ -29,6 +29,7 @@ const CanvasView = ({ imageSource }) => {
 
 CanvasView.propTypes = {
   imageSource: PropTypes.string.isRequired,
+  allowEdit: PropTypes.bool.isRequired,
 };
 
 export default CanvasView;
