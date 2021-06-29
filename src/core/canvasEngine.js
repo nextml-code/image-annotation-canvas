@@ -13,7 +13,11 @@ import {
 import keyPress from "./keyPress";
 import keyUp from "./keyUp";
 
-const canvasEngine = (state, dispatch) => (event) => {
+const canvasEngine = (state, dispatch, allowEdit) => (event) => {
+  if (!allowEdit) {
+    return;
+  }
+
   switch (event.type) {
     case MOUSE_DOWN: {
       mouseDown(state, dispatch, event);
