@@ -1,16 +1,8 @@
+import { boundingBoxToAbsolute } from "./boundingBoxToAbsolute";
 import getAbsoluteCoordinate from "./getAbsoluteCoordinate";
-import { BOUNDING_BOX } from "./polygonTypes";
-
-const getCoordinates = (polygon) => {
-  if (polygon.type === BOUNDING_BOX) {
-    return polygon.bbox.coordinates;
-  }
-
-  return polygon.coordinates;
-};
 
 const drawPolygon = (canvas, state, polygon, color) => {
-  const coordinates = getCoordinates(polygon).map(
+  const coordinates = polygon.coordinates.map(
     getAbsoluteCoordinate(state.canvasDimensions),
   );
 
@@ -32,18 +24,15 @@ const drawPolygon = (canvas, state, polygon, color) => {
       context.stroke();
 
       if (state.options.displayBoundingBox) {
-        const boxCoordinates = polygon.bbox.coordinates.map(
-          getAbsoluteCoordinate(state.canvasDimensions),
-        );
-        const startBoxCoordinate = boxCoordinates[0];
+        const { x, y, width, height } = boundingBoxToAbsolute(
+          state.canvasDimensions,
+        )(polygon.bbox);
+
         context.beginPath();
         context.strokeStyle = `${color}`; // eslint-disable-line no-param-reassign
         context.setLineDash([10]);
         context.lineWidth = 3;
-        context.moveTo(startBoxCoordinate.x, startBoxCoordinate.y);
-        boxCoordinates.slice(1).forEach((coordinate) => {
-          context.lineTo(coordinate.x, coordinate.y);
-        });
+        context.rect(x, y, width, height);
         context.closePath();
         context.stroke();
       }

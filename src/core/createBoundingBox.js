@@ -7,16 +7,6 @@ const createBoundingBox = (coordinates) => {
   const ymax = Math.max(...ys);
 
   return {
-    xmin,
-    xmax,
-    ymin,
-    ymax,
-    coordinates: [
-      { x: xmin, y: ymin },
-      { x: xmax, y: ymin },
-      { x: xmax, y: ymax },
-      { x: xmin, y: ymax },
-    ],
     x: xmin,
     y: ymin,
     width: xmax - xmin,
