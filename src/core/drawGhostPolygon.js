@@ -39,12 +39,13 @@ const createGhostPolygon = (state) => {
       getRelativeCoordinate(state.canvasDimensions, state.mousePosition),
     ]),
     visible: true,
+    color: "#FF8811",
   };
 };
 
 const drawGhostPolygon = (canvas, state) => {
   if (condition(state)) {
-    return drawPolygon(canvas, state, createGhostPolygon(state), "#666666");
+    return drawPolygon(canvas, state, createGhostPolygon(state));
   }
 
   return null;
