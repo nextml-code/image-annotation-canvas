@@ -27,6 +27,18 @@ canvasActions.annotations.set([{coordinates: [{x: 0.1, y: 0.15}]}])
   state={state}
   dispatch={dispatch}
   completeAnnotationOn={(state) => { /* return a bool calculated from the state */ }}
+  config={{
+    bbox: {
+      display: true,
+      lineDash: [], // html canvas line dash
+      lineWidth: 3, // html canvas line width
+    },
+    polygon: {
+      display: false,
+      lineDash: [10], // html canvas line dash
+      lineWidth: 10, // html canvas line width
+    },
+  }}
 />
 ```
 
