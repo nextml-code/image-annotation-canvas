@@ -4,22 +4,13 @@ import { v4 as uuid } from "uuid";
 import Canvas, { initialState, reducer, actions } from "..";
 import { exampleurl } from "./mockdata.js";
 
-const annotations = [];
-
 export default {
   title: "Annotation Canvas",
   component: Canvas,
 };
 
-const boundingBoxToPloygon = ({ x, y, width, height }) => [
-  { x, y, id: uuid() },
-  { x: x + width, y, id: uuid() },
-  { x: x + width, y: y + height, id: uuid() },
-  { x, y: y + height, id: uuid() },
-];
-
 // eslint-disable-next-line react/jsx-props-no-spreading
-const Template = () => {
+const Template = (args) => {
   const [state, dispatch] = useReducer(reducer("DEBUG"), {
     ...initialState,
     options: { displayBoundingBox: true },
@@ -27,22 +18,21 @@ const Template = () => {
 
   const canvasActions = actions(state, dispatch);
 
-  // useEffect(() => {
-  //   canvasActions.annotations.set(
-  //     annotations.map((a) => ({
-  //       ...a,
-  //       id: uuid(),
-  //       coordinates: boundingBoxToPloygon(a.bbox).map(
-  //         canvasActions.coordinates.toRelative,
-  //       ),
-  //       visible: true,
-  //     })),
-  //   );
-  // }, [state.canvasDimensions]);
-
   return (
     <div>
-      <Canvas imageSource={exampleurl} state={state} dispatch={dispatch} />
+      <Canvas
+        imageSource={exampleurl}
+        state={state}
+        dispatch={dispatch}
+        completeAnnotationOn={(canvasState) => {
+          return (
+            canvasState.annotations.filter(
+              (annotation) => canvasState.activeAnnotationId === annotation.id,
+            )[0]?.coordinates?.length > 1
+          );
+        }}
+        primaryOutline="bounding-box"
+      />
       <button
         type="button"
         onClick={() => {
@@ -74,3 +64,4 @@ const Template = () => {
 };
 
 export const Primary = Template.bind({});
+export const Secondary = Template.bind({});

@@ -26,6 +26,7 @@ canvasActions.annotations.set([{coordinates: [{x: 0.1, y: 0.15}]}])
   imageSource="/some/url"
   state={state}
   dispatch={dispatch}
+  completeAnnotationOn={(state) => { /* return a bool calculated from the state */ }}
 />
 ```
 

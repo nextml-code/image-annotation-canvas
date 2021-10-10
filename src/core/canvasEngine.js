@@ -9,9 +9,11 @@ import {
   MOUSE_MOVE,
   MOUSE_DOWN,
   MOUSE_UP,
+  DOUBLE_CLICK,
 } from "./eventTypes";
 import keyPress from "./keyPress";
 import keyUp from "./keyUp";
+import { FINISH_POLYGON } from "../store/actionTypes";
 
 const canvasEngine = (state, dispatch, allowEdit) => (event) => {
   if (!allowEdit) {
@@ -19,6 +21,11 @@ const canvasEngine = (state, dispatch, allowEdit) => (event) => {
   }
 
   switch (event.type) {
+    case DOUBLE_CLICK: {
+      dispatch({ type: FINISH_POLYGON });
+      break;
+    }
+
     case MOUSE_DOWN: {
       mouseDown(state, dispatch, event);
       break;
