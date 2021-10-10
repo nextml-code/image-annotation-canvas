@@ -23,6 +23,7 @@ const Template = (args) => {
         imageSource={exampleurl}
         state={state}
         dispatch={dispatch}
+<<<<<<< HEAD
         completeAnnotationOn={(canvasState) => {
           return (
             canvasState.annotations.filter(
@@ -43,6 +44,20 @@ const Template = (args) => {
             lineWidth: 10,
           },
         }}
+=======
+        // config={{
+        //   bbox: {
+        //     display: true,
+        //     lineDash: [],
+        //     lineWidth: 3,
+        //   },
+        //   polygon: {
+        //     display: false,
+        //     lineDash: [10],
+        //     lineWidth: 10,
+        //   },
+        // }}
+>>>>>>> 98a94e4 (feature: add configuration options)
       />
       <button
         type="button"

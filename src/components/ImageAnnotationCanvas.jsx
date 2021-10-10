@@ -36,7 +36,11 @@ ImageAnnotationCanvas.propTypes = {
 
 ImageAnnotationCanvas.defaultProps = {
   allowEdit: true,
+<<<<<<< HEAD
   completeAnnotationOn: () => false,
+=======
+  config: {},
+>>>>>>> 98a94e4 (feature: add configuration options)
 };
 
 export default ImageAnnotationCanvas;
