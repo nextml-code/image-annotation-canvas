@@ -13,7 +13,6 @@ export default {
 const Template = (args) => {
   const [state, dispatch] = useReducer(reducer("DEBUG"), {
     ...initialState,
-    options: { displayBoundingBox: true },
   });
 
   const canvasActions = actions(state, dispatch);
@@ -32,6 +31,18 @@ const Template = (args) => {
           );
         }}
         primaryOutline="bounding-box"
+        config={{
+          bbox: {
+            display: true,
+            lineDash: [],
+            lineWidth: 3,
+          },
+          polygon: {
+            display: false,
+            lineDash: [10],
+            lineWidth: 10,
+          },
+        }}
       />
       <button
         type="button"

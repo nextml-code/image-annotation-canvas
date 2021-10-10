@@ -10,6 +10,7 @@ const ImageAnnotationCanvas = ({
   dispatch,
   allowEdit,
   completeAnnotationOn,
+  config,
 }) => {
   useEffect(() => {
     if (completeAnnotationOn(state)) {
@@ -18,7 +19,7 @@ const ImageAnnotationCanvas = ({
   }, [state]);
 
   return (
-    <CanvasContext.Provider value={{ state, dispatch }}>
+    <CanvasContext.Provider value={{ state: { ...state, config }, dispatch }}>
       <CanvasView imageSource={imageSource} allowEdit={allowEdit} />
     </CanvasContext.Provider>
   );
@@ -30,6 +31,7 @@ ImageAnnotationCanvas.propTypes = {
   dispatch: PropTypes.func.isRequired,
   allowEdit: PropTypes.bool,
   completeAnnotationOn: func,
+  config: PropTypes.shape(),
 };
 
 ImageAnnotationCanvas.defaultProps = {
