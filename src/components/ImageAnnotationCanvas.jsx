@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import PropTypes, { func } from "prop-types";
+import PropTypes from "prop-types";
 import CanvasView from "./CanvasView";
 import CanvasContext from "../store/CanvasContext";
 import { FINISH_POLYGON } from "../store/actionTypes";
@@ -30,17 +30,14 @@ ImageAnnotationCanvas.propTypes = {
   state: PropTypes.shape().isRequired,
   dispatch: PropTypes.func.isRequired,
   allowEdit: PropTypes.bool,
-  completeAnnotationOn: func,
+  completeAnnotationOn: PropTypes.func,
   config: PropTypes.shape(),
 };
 
 ImageAnnotationCanvas.defaultProps = {
   allowEdit: true,
-<<<<<<< HEAD
   completeAnnotationOn: () => false,
-=======
   config: {},
->>>>>>> 98a94e4 (feature: add configuration options)
 };
 
 export default ImageAnnotationCanvas;
