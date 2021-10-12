@@ -27,32 +27,32 @@ const getSelectedPointId = (payload) => {
 const selectPoint = (state, action) => {
   const { payload } = action;
 
-  if (payload === undefined) {
+  if (payload === undefined || payload === null) {
     return {
       ...state,
       selectedPoint: null,
     };
   }
 
-  const { coordinates } = getActiveAnnotation(state);
+  // const { coordinates } = getActiveAnnotation(state);
 
   // Reorder the coordinnates so that the
   // selected point is the last one in the
   // array of coordinates
-  const reorderedCoordinates = reorderArray(
-    coordinates,
-    getPointIndex(coordinates, payload), // Index of selected point
-    coordinates.length - 1,
-  );
 
-  const selectedPointId = getSelectedPointId(payload);
+  // const reorderedCoordinates = reorderArray(
+  //   coordinates,
+  //   getPointIndex(coordinates, payload), // Index of selected point
+  //   coordinates.length - 1,
+  // );
+
   return {
     ...state,
-    selectedPoint: selectedPointId,
-    annotations: modifyActiveAnnotation(state, (activeAnnotation) => ({
-      ...activeAnnotation,
-      coordinates: reorderedCoordinates,
-    })),
+    selectedPoint: getSelectedPointId(payload),
+    // annotations: modifyActiveAnnotation(state, (activeAnnotation) => ({
+    //   ...activeAnnotation,
+    //   coordinates: reorderedCoordinates,
+    // })),
   };
 };
 

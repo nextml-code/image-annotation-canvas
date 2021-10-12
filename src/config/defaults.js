@@ -6,6 +6,8 @@ export const defaultKeyMap = {
   movePointDown: "s",
   movePointLeft: "a",
   finishPolygon: "Enter",
+  edit: "Meta",
+  escape: "Escape",
 };
 
 export const defaultUIColors = [

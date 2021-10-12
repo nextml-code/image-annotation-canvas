@@ -7,6 +7,7 @@ import {
   REMOVE_SELECTED_POINT,
   REMOVE_ANNOTATION_BY_ID,
   EDIT_ANOTATION_BY_ID,
+  POP_ANNOTATION,
 } from "./actionTypes";
 import addPolygonCoordinate from "./actions/addPolygonCoordinate";
 import selectPoint from "./actions/selectPoint";
@@ -66,6 +67,17 @@ const actionSwitch = (state, action) => {
           }
           return annotation;
         }),
+      };
+    }
+
+    case POP_ANNOTATION: {
+      return {
+        ...state,
+        annotations: state.annotations.filter(
+          (annotation) => annotation.id !== state.activeAnnotationId,
+        ),
+
+        activeAnnotationId: null,
       };
     }
 

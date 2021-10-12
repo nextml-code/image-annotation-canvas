@@ -1,4 +1,4 @@
-import { SET_RESIZING } from "../store/actionTypes";
+import { SET_RESIZING, SET_EDIT_COORDINATES } from "../store/actionTypes";
 
 const keyUp = (state, dispatch, event) => {
   event.preventDefault();
@@ -6,6 +6,10 @@ const keyUp = (state, dispatch, event) => {
   const { keyMap } = state;
 
   switch (key) {
+    case keyMap.edit: {
+      return dispatch({ type: SET_EDIT_COORDINATES, payload: false });
+    }
+
     case keyMap.movePoint: {
       return dispatch({
         type: SET_RESIZING,

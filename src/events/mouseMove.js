@@ -1,23 +1,15 @@
 import isDefined from "@codewell/is-defined";
-import updateHoveredPoints from "./updateHoveredPoints";
-import updateCursor from "./updateCursor";
+import updateHoveredPoints from "../core/hoveredPoints/updateHoveredPoints";
+import updateCursor from "../core/updateCursor";
 import {
   SET_MOUSE_POSITION,
   REPLACE_POINT,
   COMBINE,
 } from "../store/actionTypes";
-import getRelativeCoordinate from "./getRelativeCoordinate";
+import getRelativeCoordinate from "../core/getRelativeCoordinate";
 
 const getAction = (state, mousePosition) => {
-  const { activeAnnotationId, mouseIsDown, selectedPoint, canvasDimensions } =
-    state;
-
-  if (activeAnnotationId === null) {
-    return {
-      type: "",
-      payload: null,
-    };
-  }
+  const { mouseIsDown, selectedPoint, canvasDimensions } = state;
 
   if (mouseIsDown) {
     return {

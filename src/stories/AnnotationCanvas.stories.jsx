@@ -1,6 +1,5 @@
 import last from "@codewell/last";
 import React, { useReducer } from "react";
-import { v4 as uuid } from "uuid";
 import Canvas, { initialState, reducer, actions } from "..";
 import { exampleurl } from "./mockdata.js";
 
@@ -24,11 +23,12 @@ const Template = (args) => {
         state={state}
         dispatch={dispatch}
         completeAnnotationOn={(canvasState) => {
-          return (
-            canvasState.annotations.filter(
-              (annotation) => canvasState.activeAnnotationId === annotation.id,
-            )[0]?.coordinates?.length > 1
-          );
+          // return (
+          //   canvasState.annotations.filter(
+          //     (annotation) => canvasState.activeAnnotationId === annotation.id,
+          //   )[0]?.coordinates?.length > 1
+          // );
+          return false;
         }}
         primaryOutline="bounding-box"
         config={{
@@ -38,23 +38,11 @@ const Template = (args) => {
             lineWidth: 3,
           },
           polygon: {
-            display: false,
+            display: true,
             lineDash: [10],
-            lineWidth: 10,
+            lineWidth: 3,
           },
         }}
-        // config={{
-        //   bbox: {
-        //     display: true,
-        //     lineDash: [],
-        //     lineWidth: 3,
-        //   },
-        //   polygon: {
-        //     display: false,
-        //     lineDash: [10],
-        //     lineWidth: 10,
-        //   },
-        // }}
       />
       <button
         type="button"

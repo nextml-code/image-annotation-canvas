@@ -1,21 +1,21 @@
 import getCanvasMousePosition from "@codewell/get-canvas-mouse-position";
-import mouseDown from "./mouseDown";
-import mouseUp from "./mouseUp";
-import mouseMove from "./mouseMove";
-
 import {
-  KEY_PRESS,
   KEY_UP,
   MOUSE_MOVE,
   MOUSE_DOWN,
   MOUSE_UP,
   DOUBLE_CLICK,
+  KEY_DOWN,
 } from "./eventTypes";
-import keyPress from "./keyPress";
-import keyUp from "./keyUp";
 import { FINISH_POLYGON } from "../store/actionTypes";
 
-const canvasEngine = (state, dispatch, allowEdit) => (event) => {
+import keyDown from "./keyDown";
+import keyUp from "./keyUp";
+import mouseDown from "./mouseDown";
+import mouseMove from "./mouseMove";
+import mouseUp from "./mouseUp";
+
+const eventHandler = (state, dispatch, allowEdit) => (event) => {
   if (!allowEdit) {
     return;
   }
@@ -41,8 +41,8 @@ const canvasEngine = (state, dispatch, allowEdit) => (event) => {
       break;
     }
 
-    case KEY_PRESS: {
-      keyPress(state, dispatch, event);
+    case KEY_DOWN: {
+      keyDown(state, dispatch, event);
       break;
     }
 
@@ -58,4 +58,4 @@ const canvasEngine = (state, dispatch, allowEdit) => (event) => {
   }
 };
 
-export default canvasEngine;
+export default eventHandler;

@@ -6,11 +6,25 @@ import {
   SELECT_POINT,
   INITIATE_ANNOTATION,
   COMBINE,
+  REPLACE_POINT,
 } from "../store/actionTypes";
-import createPolygon from "./createPolygon";
+import createPolygon from "../core/createPolygon";
 
 const getActions = (state, mousePosition) => {
   const { activeAnnotationId, hoveredPoints } = state;
+
+  if (!isEmpty(hoveredPoints)) {
+    return [
+      {
+        type: SELECT_POINT,
+        payload: hoveredPoints[0],
+      },
+      {
+        type: REPLACE_POINT,
+        payload: mousePosition,
+      },
+    ];
+  }
 
   if (activeAnnotationId === null) {
     return [
