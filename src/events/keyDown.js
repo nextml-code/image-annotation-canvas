@@ -1,12 +1,26 @@
-import { FINISH_POLYGON, REMOVE_SELECTED_POINT } from "../store/actionTypes";
-import movePoint from "./movePoint";
+import {
+  SET_EDIT_COORDINATES,
+  FINISH_POLYGON,
+  REMOVE_SELECTED_POINT,
+  POP_ANNOTATION,
+} from "../store/actionTypes";
 
-const keyPress = (state, dispatch, event) => {
+import movePoint from "../core/movePoint";
+
+const keyDown = (state, dispatch, event) => {
   event.preventDefault();
   const { key } = event;
   const { keyMap } = state;
 
   switch (key) {
+    case keyMap.escape: {
+      return dispatch({ type: POP_ANNOTATION });
+    }
+
+    case keyMap.edit: {
+      return dispatch({ type: SET_EDIT_COORDINATES, payload: true });
+    }
+
     case keyMap.finishPolygon: {
       return dispatch({ type: FINISH_POLYGON });
     }
@@ -41,4 +55,4 @@ const keyPress = (state, dispatch, event) => {
   }
 };
 
-export default keyPress;
+export default keyDown;

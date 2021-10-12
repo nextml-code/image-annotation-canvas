@@ -8,6 +8,8 @@ import {
   INITIATE_ANNOTATION,
   SET_ACTIVE_ANNOTATION_ID,
   SET_ANNOTATIONS,
+  SET_EDIT_COORDINATES,
+  SET_HOVERED_POINTS,
 } from "./actionTypes";
 
 const actionSwitchConfig = {
@@ -30,6 +32,10 @@ const logger =
     if (!["DEBUG", "INFORMATIONAL"].includes(loglevel)) {
       return;
     }
+
+    // if (loglevel === "DEBUG") {
+    //   return stateLogger(...args);
+    // }
 
     if (loglevel === "INFORMATIONAL") {
       const [, action] = args;
@@ -56,6 +62,8 @@ const reducer = (loglevel) => (state, action) => {
     SET_ANNOTATIONS,
     INITIATE_ANNOTATION,
     EDIT_ANOTATION_BY_ID,
+    SET_EDIT_COORDINATES,
+    SET_HOVERED_POINTS,
   );
 
   if (action.type === COMBINE) {

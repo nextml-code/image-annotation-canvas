@@ -1,14 +1,10 @@
 import retrieveFromArray from "@codewell/retrieve-from-array";
-import getActiveAnnotation from "./getActiveAnnotation";
+import { getAllCoordinates } from "./getAllCoordinates";
 
 const getSelectedPoint = (state) => {
-  const activeAnnotation = getActiveAnnotation(state);
+  const coordinates = getAllCoordinates(state);
 
-  if (activeAnnotation === undefined) {
-    return;
-  }
-
-  const [selectedPoint] = retrieveFromArray(activeAnnotation.coordinates, {
+  const [selectedPoint] = retrieveFromArray(coordinates, {
     id: state.selectedPoint,
   });
 

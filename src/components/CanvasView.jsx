@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import Canvas from "./Canvas";
-import canvasEngine from "../core/canvasEngine";
+import eventHandler from "../events/handler.js";
 import useCanvasRenderUpdate from "../hooks/useCanvasRenderUpdate";
 import CanvasContext from "../store/CanvasContext";
 import MetaCanvas from "./MetaCanvas";
@@ -19,7 +19,7 @@ const CanvasView = ({ imageSource, allowEdit }) => {
       <MetaCanvas />
       <Canvas
         onInit={onCanvasInit(setCanvas)}
-        onEvent={canvasEngine(state, dispatch, allowEdit)}
+        onEvent={eventHandler(state, dispatch, allowEdit)}
         cursor={state.cursor}
         dimensions={state.canvasDimensions}
       />

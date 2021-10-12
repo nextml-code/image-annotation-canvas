@@ -13,7 +13,4 @@ export default Object.freeze({
   showGhostPolygon: true,
   image: {},
   canvasDimensions: { width: 0, height: 0 },
-  options: {
-    displayBoundingBox: true,
-  },
 });

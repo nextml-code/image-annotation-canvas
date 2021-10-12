@@ -14,9 +14,9 @@ const Canvas = ({ cursor, onInit, onEvent, dimensions }) => {
       onMouseDown={onEvent}
       onMouseMove={onEvent}
       onMouseUp={onEvent}
-      onKeyPress={onEvent}
       onDoubleClick={onEvent}
       onKeyUp={onEvent}
+      onKeyDown={onEvent}
       width={width}
       height={height}
     />
