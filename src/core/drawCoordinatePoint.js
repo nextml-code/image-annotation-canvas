@@ -1,8 +1,9 @@
 import getAbsoluteCoordinate from "./getAbsoluteCoordinate";
 import getContext from "./getContext";
 
-const POINT_SIZE = 1;
-const DEFAULT_COLORS = ["#4b7bec", "#2d98da", "#45aaf2"];
+const POINT_SIZE = 3;
+// const DEFAULT_COLORS = ["#4b7bec", "#2d98da", "#45aaf2"];
+const DEFAULT_COLORS = ["#F67EFB", "#F67EFB", "#F67EFB"];
 
 const drawCoordinatePoint =
   (canvas, state, colorScheme = DEFAULT_COLORS) =>

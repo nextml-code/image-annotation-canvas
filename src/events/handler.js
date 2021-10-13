@@ -7,7 +7,7 @@ import {
   DOUBLE_CLICK,
   KEY_DOWN,
 } from "./eventTypes";
-import { FINISH_POLYGON } from "../store/actionTypes";
+import { COMBINE, FINISH_POLYGON, POP_COORDINATE } from "../store/actionTypes";
 
 import keyDown from "./keyDown";
 import keyUp from "./keyUp";
@@ -22,7 +22,10 @@ const eventHandler = (state, dispatch, allowEdit) => (event) => {
 
   switch (event.type) {
     case DOUBLE_CLICK: {
-      dispatch({ type: FINISH_POLYGON });
+      dispatch({
+        type: COMBINE,
+        payload: [{ type: POP_COORDINATE }, { type: FINISH_POLYGON }],
+      });
       break;
     }
 
