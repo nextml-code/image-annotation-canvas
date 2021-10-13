@@ -8,12 +8,14 @@ import {
   REMOVE_ANNOTATION_BY_ID,
   EDIT_ANOTATION_BY_ID,
   POP_ANNOTATION,
+  POP_COORDINATE,
 } from "./actionTypes";
 import addPolygonCoordinate from "./actions/addPolygonCoordinate";
 import selectPoint from "./actions/selectPoint";
 import initiateAnnotation from "./actions/initiateAnnotation";
 import replacePoint from "./actions/replacePoint";
 import removeSelectedPoint from "./actions/removeSelectedPoint";
+import modifyActiveAnnotation from "../core/modifyActiveAnnotation";
 
 const actionSwitch = (state, action) => {
   switch (action.type) {
@@ -78,6 +80,21 @@ const actionSwitch = (state, action) => {
         ),
 
         activeAnnotationId: null,
+      };
+    }
+
+    case POP_COORDINATE: {
+      return {
+        ...state,
+        annotations: modifyActiveAnnotation(state, (activeAnnotation) => {
+          return {
+            ...activeAnnotation,
+            coordinates: activeAnnotation.coordinates.slice(
+              0,
+              activeAnnotation.coordinates.length - 1,
+            ),
+          };
+        }),
       };
     }
 
