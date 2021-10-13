@@ -1,58 +1,58 @@
 import reorderArray from "@codewell/reorder-array";
+import isDefined from "@codewell/is-defined";
 import getActiveAnnotation from "../../core/getActiveAnnotation";
 import modifyActiveAnnotation from "../../core/modifyActiveAnnotation";
-import getPointIndex from "../../core/getPointIndex";
+import getCoordinateIndex from "../../core/getCoordinateIndex";
 
-const getSelectedPointId = (payload) => {
-  switch (typeof payload) {
-    case "string": {
-      // If the payload is a string
-      // assume we got the id of the point
-      return payload;
-    }
-
-    case "object": {
-      // If the payload is an object
-      // assume that the point object is passed
-      // and retreive the id from the object
-      return payload.id;
-    }
-
-    default: {
-      return undefined;
-    }
-  }
-};
+const getCoordinateParentAnnotation = (state, coordinateId) =>
+  state.annotations.filter(
+    (annotation) =>
+      annotation.coordinates.filter(
+        (coordinate) => coordinate.id === coordinateId,
+      ).length > 0,
+  )[0];
 
 const selectPoint = (state, action) => {
   const { payload } = action;
 
-  if (payload === undefined || payload === null) {
+  if (!isDefined(payload)) {
     return {
       ...state,
       selectedPoint: null,
+      activeAnnotationId: null,
     };
   }
 
-  // const { coordinates } = getActiveAnnotation(state);
+  const annotation = getCoordinateParentAnnotation(state, payload.id);
+
+  const { coordinates } = getActiveAnnotation({
+    ...state,
+    activeAnnotationId: annotation.id,
+  });
 
   // Reorder the coordinnates so that the
   // selected point is the last one in the
   // array of coordinates
+  const reorderedCoordinates = reorderArray(
+    coordinates,
+    getCoordinateIndex(coordinates, payload), // Index of selected point
+    coordinates.length - 1,
+  );
 
-  // const reorderedCoordinates = reorderArray(
-  //   coordinates,
-  //   getPointIndex(coordinates, payload), // Index of selected point
-  //   coordinates.length - 1,
-  // );
+  const selectedPoint = payload.id;
+  const activeAnnotationId = annotation.id;
 
   return {
     ...state,
-    selectedPoint: getSelectedPointId(payload),
-    // annotations: modifyActiveAnnotation(state, (activeAnnotation) => ({
-    //   ...activeAnnotation,
-    //   coordinates: reorderedCoordinates,
-    // })),
+    selectedPoint,
+    activeAnnotationId,
+    annotations: modifyActiveAnnotation(
+      { ...state, activeAnnotationId },
+      (activeAnnotation) => ({
+        ...activeAnnotation,
+        coordinates: reorderedCoordinates,
+      }),
+    ),
   };
 };
 
