@@ -55,6 +55,22 @@ const logger =
     }
   };
 
+// Remove annotations that have no coordinates
+const cleanup = (state) => ({
+  ...state,
+  annotations: state.annotations.filter(
+    ({ coordinates }) => coordinates.length > 0,
+  ),
+  // If the active annotation is removed due to no coordinates left
+  // make sure to unset it as sctive.
+  activeAnnotationId: !state.annotations
+    .filter(({ coordinates }) => coordinates.length > 0)
+    .map((a) => a.id)
+    .includes(state.activeAnnotationId)
+    ? null
+    : state.activeAnnotationId,
+});
+
 const reducer = (loglevel) => (state, action) => {
   const logState = logger(loglevel)(
     FINISH_POLYGON,
@@ -69,13 +85,13 @@ const reducer = (loglevel) => (state, action) => {
   if (action.type === COMBINE) {
     const combinedState = action.payload.reduce(automaticActionSwitch, state);
     logState(state, action, combinedState);
-    return combinedState;
+    return cleanup(combinedState);
   }
 
   const nextState = automaticActionSwitch(state, action);
   logState(state, action, nextState);
 
-  return nextState;
+  return cleanup(nextState);
 };
 
 export default reducer;

@@ -1,12 +1,12 @@
 export const defaultKeyMap = {
-  removePoint: "-",
+  removePoint: "Backspace",
   movePoint: "m",
   movePointUp: "w",
   movePointRight: "d",
   movePointDown: "s",
   movePointLeft: "a",
   finishPolygon: "Enter",
-  edit: "Meta",
+  edit: "Shift",
   escape: "Escape",
 };
 

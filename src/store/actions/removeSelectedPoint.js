@@ -1,3 +1,4 @@
+import isDefined from "@codewell/is-defined";
 import modifyActiveAnnotation from "../../core/modifyActiveAnnotation";
 import getActiveAnnotation from "../../core/getActiveAnnotation";
 import createBoundingBox from "../../core/createBoundingBox";
@@ -5,7 +6,7 @@ import createBoundingBox from "../../core/createBoundingBox";
 const getNextSelectedPoint = (state) => {
   const activeAnnotation = getActiveAnnotation(state);
 
-  if (activeAnnotation === undefined) {
+  if (!isDefined(activeAnnotation)) {
     return null;
   }
   const { coordinates } = activeAnnotation;
@@ -21,19 +22,25 @@ const getNextSelectedPoint = (state) => {
   return coordinates[coordinates.length - 2].id;
 };
 
-const removeSelectedPoint = (state) => ({
-  ...state,
-  selectedPoint: getNextSelectedPoint(state),
-  annotations: modifyActiveAnnotation(state, (activeAnnotation) => {
-    const nextCoordinates = activeAnnotation.coordinates.filter(
-      (point) => point.id !== state.selectedPoint,
-    );
+const removeSelectedPoint = (state) => {
+  if (isDefined(getActiveAnnotation(state))) {
     return {
-      ...activeAnnotation,
-      coordinates: nextCoordinates,
-      bbox: createBoundingBox(nextCoordinates),
+      ...state,
+      selectedPoint: getNextSelectedPoint(state),
+      annotations: modifyActiveAnnotation(state, (activeAnnotation) => {
+        const nextCoordinates = activeAnnotation.coordinates.filter(
+          (coordinate) => coordinate.id !== state.selectedPoint,
+        );
+        return {
+          ...activeAnnotation,
+          coordinates: nextCoordinates,
+          bbox: createBoundingBox(nextCoordinates),
+        };
+      }),
     };
-  }),
-});
+  }
+
+  return state;
+};
 
 export default removeSelectedPoint;

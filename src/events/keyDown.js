@@ -1,3 +1,4 @@
+import isDefined from "@codewell/is-defined";
 import {
   SET_EDIT_COORDINATES,
   FINISH_POLYGON,
@@ -46,7 +47,10 @@ const keyDown = (state, dispatch, event) => {
     }
 
     case keyMap.removePoint: {
-      return dispatch({ type: REMOVE_SELECTED_POINT });
+      if (isDefined(state.selectedPoint)) {
+        return dispatch({ type: REMOVE_SELECTED_POINT });
+      }
+      break;
     }
 
     default: {

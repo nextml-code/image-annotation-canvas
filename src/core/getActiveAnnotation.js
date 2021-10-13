@@ -1,6 +1,6 @@
 const getActiveAnnotation = ({ annotations, activeAnnotationId }) => {
   const [activeAnnotation] = annotations.filter(
-    (a) => a.id === activeAnnotationId,
+    (annotation) => annotation.id === activeAnnotationId,
   );
   return activeAnnotation;
 };
