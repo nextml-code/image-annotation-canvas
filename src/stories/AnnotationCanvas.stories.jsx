@@ -33,13 +33,13 @@ const Template = (args) => {
         primaryOutline="bounding-box"
         config={{
           bbox: {
-            display: true,
+            display: false,
             lineDash: [],
             lineWidth: 3,
           },
           polygon: {
             display: true,
-            lineDash: [10],
+            lineDash: [],
             lineWidth: 3,
           },
         }}
