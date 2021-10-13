@@ -15,6 +15,7 @@ const useCanvasRenderUpdate = (state, canvas, allowEdit) => {
       clearCanvas(canvas);
       drawImage(canvas, state);
       drawPolygons(canvas, state);
+
       if (state.editCoordinates) drawCoordinates(canvas, state);
       if (state.editCoordinates) drawHoveredPoints(canvas, state);
       if (state.editCoordinates) drawSelectedPoint(canvas, state);
