@@ -73,7 +73,6 @@ const reducer = (loglevel) => (state, action) => {
   }
 
   const nextState = automaticActionSwitch(state, action);
-
   logState(state, action, nextState);
 
   return nextState;
