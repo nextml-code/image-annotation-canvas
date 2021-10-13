@@ -1,10 +1,8 @@
 import last from "@codewell/last";
-import and from "@codewell/and";
-import drawPolygon from "./drawPolygon";
+import drawPolygon from "./drawPolygon.js";
 import getActiveAnnotation from "./getActiveAnnotation";
 import getRelativeCoordinate from "./getRelativeCoordinate";
 import createBoundingBox from "./createBoundingBox";
-import { BOUNDING_BOX } from "./polygonTypes";
 
 const condition = (state) => {
   const activeAnnotation = getActiveAnnotation(state);
@@ -13,21 +11,12 @@ const condition = (state) => {
     return false;
   }
 
-  return and([activeAnnotation.coordinates.length > 0, state.showGhostPolygon]);
+  return activeAnnotation.coordinates.length > 0;
 };
 
 const createGhostPolygon = (state) => {
   const activeAnnotation = getActiveAnnotation(state);
-  // if (activeAnnotation.type === BOUNDING_BOX) {
-  //   return {
-  //     type: BOUNDING_BOX,
-  //     bbox: createBoundingBox([
-  //       ...activeAnnotation.coordinates,
-  //       getRelativeCoordinate(state.canvasDimensions, state.mousePosition),
-  //     ]),
-  //     visible: true,
-  //   };
-  // }
+
   return {
     coordinates: [
       activeAnnotation.coordinates[0],
