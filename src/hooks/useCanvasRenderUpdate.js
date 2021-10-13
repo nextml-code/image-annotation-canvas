@@ -18,10 +18,7 @@ const useCanvasRenderUpdate = (state, canvas, allowEdit) => {
       if (state.editCoordinates) drawCoordinates(canvas, state);
       if (state.editCoordinates) drawHoveredPoints(canvas, state);
       if (state.editCoordinates) drawSelectedPoint(canvas, state);
-
-      if (allowEdit) {
-        drawGhostPolygon(canvas, state);
-      }
+      if (allowEdit) drawGhostPolygon(canvas, state);
     } catch (error) {
       console.error("Failed to redraw canvas:\n");
       console.error(error);

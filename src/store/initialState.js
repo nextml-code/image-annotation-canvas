@@ -10,7 +10,6 @@ export default Object.freeze({
   hoveredPoints: [],
   keyMap: defaultKeyMap,
   UIColors: defaultUIColors,
-  showGhostPolygon: true,
   image: {},
   canvasDimensions: { width: 0, height: 0 },
 });

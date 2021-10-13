@@ -34,8 +34,8 @@ const actionSwitch = (state, action) => {
       // list of annotations
       return {
         ...state,
-        showGhostPolygon: false,
         activeAnnotationId: null,
+        selectedPoint: null,
       };
     }
 
