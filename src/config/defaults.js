@@ -19,8 +19,7 @@ export const defaultUIColors = [
   "#EAECCC",
   "#FEDA8B",
   "#FDB366",
-  "#F67EFB",
-  "#FFFFFF",
+  // "#F67EFB", // purple
   "#DD3D2D",
   "#A50026",
 ];

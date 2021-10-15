@@ -2,7 +2,7 @@ import getAbsoluteCoordinate from "./getAbsoluteCoordinate";
 import getSelectedPoint from "./getSelectedPoint";
 
 const POINT_SIZE = 2;
-const COLOR_SCHEME = ["#fa8231", "#f1c40f"];
+const COLOR_SCHEME = ["#ffffff", "#F67EFB"];
 
 const drawSelectedPoint = (canvas, state) => {
   const selectedPoint = getSelectedPoint(state);

@@ -27,7 +27,9 @@ const drawPolygon = (canvas, state, polygon) => {
           context.beginPath();
           context.fillStyle = `${polygon.color}22`; // eslint-disable-line no-param-reassign
           context.strokeStyle = polygon.color; // eslint-disable-line no-param-reassign, max-len
-          context.setLineDash(state.config?.polygon?.lineDash || []);
+          context.setLineDash(
+            polygon.lineDash || state.config?.polygon?.lineDash || [],
+          );
           context.lineWidth = state.config?.polygon?.lineWidth || 3;
           context.moveTo(startCoordinate.x, startCoordinate.y);
           coordinates.slice(1).forEach((coordinate) => {
@@ -45,7 +47,9 @@ const drawPolygon = (canvas, state, polygon) => {
 
           context.beginPath();
           context.strokeStyle = `${polygon.color}`; // eslint-disable-line no-param-reassign
-          context.setLineDash(state.config?.bbox?.lineDash || []);
+          context.setLineDash(
+            polygon.lineDash || state.config?.bbox?.lineDash || [],
+          );
           context.lineWidth = state.config?.bbox?.lineWidth || 3;
           context.rect(x, y, width, height);
           context.closePath();
