@@ -16,6 +16,7 @@ import initiateAnnotation from "./actions/initiateAnnotation";
 import replacePoint from "./actions/replacePoint";
 import removeSelectedPoint from "./actions/removeSelectedPoint";
 import modifyActiveAnnotation from "../core/modifyActiveAnnotation";
+import getActiveAnnotation from "../core/getActiveAnnotation";
 
 const actionSwitch = (state, action) => {
   switch (action.type) {
@@ -32,13 +33,21 @@ const actionSwitch = (state, action) => {
     }
 
     case FINISH_POLYGON: {
-      // Add the annotation to the complete
-      // list of annotations
-      return {
-        ...state,
-        activeAnnotationId: null,
-        selectedPoint: null,
-      };
+      if (
+        getActiveAnnotation(state).coordinates.length >=
+          state.config?.minCoordinates ||
+        state.config?.minCoordinates === undefined
+      ) {
+        // Add the annotation to the complete
+        // list of annotations
+        return {
+          ...state,
+          activeAnnotationId: null,
+          selectedPoint: null,
+        };
+      }
+
+      return state;
     }
 
     case REPLACE_POINT: {

@@ -32,6 +32,7 @@ const Template = (args) => {
         }}
         primaryOutline="bounding-box"
         config={{
+          minCoordinates: 2,
           bbox: {
             display: false,
             lineDash: [],

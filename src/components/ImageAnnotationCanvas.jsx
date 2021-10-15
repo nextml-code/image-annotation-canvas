@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import isDefined from "@codewell/is-defined";
 import CanvasView from "./CanvasView";
 import CanvasContext from "../store/CanvasContext";
 import { FINISH_POLYGON } from "../store/actionTypes";
@@ -18,8 +19,14 @@ const ImageAnnotationCanvas = ({
     }
   }, [state]);
 
+  useEffect(() => {
+    if (!isDefined(state.config)) {
+      dispatch({ type: "SET_CONFIG", payload: config });
+    }
+  }, [state.config]);
+
   return (
-    <CanvasContext.Provider value={{ state: { ...state, config }, dispatch }}>
+    <CanvasContext.Provider value={{ state, dispatch }}>
       <CanvasView imageSource={imageSource} allowEdit={allowEdit} />
     </CanvasContext.Provider>
   );
