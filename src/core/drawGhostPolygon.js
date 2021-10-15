@@ -27,8 +27,9 @@ const createGhostPolygon = (state) => {
       ...activeAnnotation.coordinates,
       getRelativeCoordinate(state.canvasDimensions, state.mousePosition),
     ]),
+    lineDash: [10],
     visible: true,
-    color: "#FF8811",
+    color: "#F67EFB",
   };
 };
 
