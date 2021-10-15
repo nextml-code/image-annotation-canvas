@@ -15,7 +15,10 @@ const keyDown = (state, dispatch, event) => {
 
   switch (key) {
     case keyMap.escape: {
-      return dispatch({ type: POP_ANNOTATION });
+      if (!state.editCoordinates) {
+        return dispatch({ type: POP_ANNOTATION });
+      }
+      return dispatch({ type: FINISH_POLYGON });
     }
 
     case keyMap.edit: {
