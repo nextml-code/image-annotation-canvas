@@ -28,6 +28,7 @@ canvasActions.annotations.set([{coordinates: [{x: 0.1, y: 0.15}]}])
   dispatch={dispatch}
   completeAnnotationOn={(state) => { /* return a bool calculated from the state */ }}
   config={{
+    minCoordinates: 3, // polygons have a minimum of 3 coordinates
     bbox: {
       display: true,
       lineDash: [], // html canvas line dash
