@@ -35,7 +35,7 @@ const createGhostPolygon = (state) => {
 
 const drawGhostPolygon = (canvas, state) => {
   if (condition(state)) {
-    return drawPolygon(canvas, state, createGhostPolygon(state));
+    return drawPolygon(canvas, state)(createGhostPolygon(state));
   }
 
   return null;

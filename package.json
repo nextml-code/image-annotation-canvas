@@ -20,6 +20,7 @@
   },
   "keywords": [],
   "devDependencies": {
+    "@aiwizo/application-styles": "^0.0.4",
     "@babel/core": "^7.12.8",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.7",

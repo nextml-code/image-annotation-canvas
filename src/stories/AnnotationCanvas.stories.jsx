@@ -10,7 +10,7 @@ export default {
 
 // eslint-disable-next-line react/jsx-props-no-spreading
 const Template = (args) => {
-  const [state, dispatch] = useReducer(reducer("DEBUG"), {
+  const [state, dispatch] = useReducer(reducer(""), {
     ...initialState,
   });
 
@@ -34,12 +34,12 @@ const Template = (args) => {
         config={{
           minCoordinates: 2,
           bbox: {
-            display: false,
+            display: true,
             lineDash: [],
             lineWidth: 3,
           },
           polygon: {
-            display: true,
+            display: false,
             lineDash: [],
             lineWidth: 3,
           },
