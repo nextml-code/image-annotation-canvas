@@ -1,8 +1,6 @@
-import drawPolygon from "./drawPolygon";
+import drawPolygon from "./drawPolygon.js";
 
 const drawPolygons = (canvas, state) =>
-  state.annotations.forEach((annotation) => {
-    drawPolygon(canvas, state, annotation);
-  });
+  state.annotations.forEach(drawPolygon(canvas, state));
 
 export default drawPolygons;
