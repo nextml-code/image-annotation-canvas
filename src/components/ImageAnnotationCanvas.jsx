@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import isDefined from "@codewell/is-defined";
 import CanvasView from "./CanvasView";
 import CanvasContext from "../store/CanvasContext";
-import { FINISH_POLYGON } from "../store/actionTypes";
+import { FINISH_POLYGON, INITIATE_CONFIG } from "../store/actionTypes";
 
 const ImageAnnotationCanvas = ({
   imageSource,
@@ -20,10 +20,9 @@ const ImageAnnotationCanvas = ({
   }, [state]);
 
   useEffect(() => {
-    if (!isDefined(state.config)) {
-      dispatch({ type: "SET_CONFIG", payload: config });
-    }
-  }, [state.config]);
+    console.log("hello, world");
+    dispatch({ type: INITIATE_CONFIG, payload: config });
+  }, []);
 
   return (
     <CanvasContext.Provider value={{ state, dispatch }}>

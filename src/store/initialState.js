@@ -9,7 +9,9 @@ export default Object.freeze({
   resizing: false,
   hoveredPoints: [],
   keyMap: defaultKeyMap,
-  UIColors: defaultUIColors,
   image: {},
   canvasDimensions: { width: 0, height: 0 },
+  config: {
+    colors: defaultUIColors,
+  },
 });
