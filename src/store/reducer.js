@@ -6,6 +6,7 @@ import {
   EDIT_ANOTATION_BY_ID,
   FINISH_POLYGON,
   INITIATE_ANNOTATION,
+  INITIATE_CONFIG,
   SET_ACTIVE_ANNOTATION_ID,
   SET_ANNOTATIONS,
   SET_EDIT_COORDINATES,
@@ -27,30 +28,10 @@ const automaticActionSwitch = partialAutomaticActionSwitch(
 
 const logger =
   (loglevel) =>
-  (...actions) =>
   (...args) => {
-    if (!["DEBUG", "INFORMATIONAL"].includes(loglevel)) {
-      return;
-    }
+    const [, action] = args;
 
-    // if (loglevel === "DEBUG") {
-    //   return stateLogger(...args);
-    // }
-
-    if (loglevel === "INFORMATIONAL") {
-      const [, action] = args;
-      return console.log(action.type, "::", action.payload);
-    }
-
-    if (
-      args[1].type === COMBINE &&
-      args[1].payload.map((a) => a.type).filter((a) => actions.includes(a))
-        .length > 0
-    ) {
-      return stateLogger(...args);
-    }
-
-    if (actions.includes(args[1].type)) {
+    if (loglevel.split(",").includes(action.type)) {
       return stateLogger(...args);
     }
   };
@@ -72,15 +53,7 @@ const cleanup = (state) => ({
 });
 
 const reducer = (loglevel) => (state, action) => {
-  const logState = logger(loglevel)(
-    FINISH_POLYGON,
-    SET_ACTIVE_ANNOTATION_ID,
-    SET_ANNOTATIONS,
-    INITIATE_ANNOTATION,
-    EDIT_ANOTATION_BY_ID,
-    SET_EDIT_COORDINATES,
-    SET_HOVERED_POINTS,
-  );
+  const logState = logger(loglevel);
 
   if (action.type === COMBINE) {
     const combinedState = action.payload.reduce(automaticActionSwitch, state);

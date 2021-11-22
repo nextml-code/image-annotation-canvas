@@ -1,8 +1,9 @@
 export const getUIColor = (state) => {
-  const { UIColors } = state;
-  const colorIndex =
-    (state.annotations.length + UIColors.length) % UIColors.length;
-  return UIColors[colorIndex];
+  const {
+    config: { colors },
+  } = state;
+  const colorIndex = (state.annotations.length + colors.length) % colors.length;
+  return colors[colorIndex];
 };
 
 export default getUIColor;

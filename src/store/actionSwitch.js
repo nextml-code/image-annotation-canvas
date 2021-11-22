@@ -9,6 +9,7 @@ import {
   EDIT_ANOTATION_BY_ID,
   POP_ANNOTATION,
   POP_COORDINATE,
+  INITIATE_CONFIG,
 } from "./actionTypes";
 import addPolygonCoordinate from "./actions/addPolygonCoordinate";
 import selectPoint from "./actions/selectPoint";
@@ -20,6 +21,16 @@ import getActiveAnnotation from "../core/getActiveAnnotation";
 
 const actionSwitch = (state, action) => {
   switch (action.type) {
+    case INITIATE_CONFIG: {
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          ...action.payload,
+        },
+      };
+    }
+
     case INITIATE_ANNOTATION: {
       return initiateAnnotation(state, action);
     }

@@ -10,7 +10,7 @@ export default {
 
 // eslint-disable-next-line react/jsx-props-no-spreading
 const Template = (args) => {
-  const [state, dispatch] = useReducer(reducer(""), {
+  const [state, dispatch] = useReducer(reducer("INITIATE_CONFIG"), {
     ...initialState,
   });
 
@@ -43,6 +43,7 @@ const Template = (args) => {
             lineDash: [],
             lineWidth: 3,
           },
+          colors: ["#ff0000", "#00ff00", "#0000ff"],
         }}
       />
       <button
