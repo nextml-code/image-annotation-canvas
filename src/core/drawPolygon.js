@@ -76,7 +76,8 @@ const drawPolygon = (canvas, state) => (polygon, index) => {
         ) {
           const [startCoordinate] = coordinates;
           context.beginPath();
-          context.fillStyle = `${polygon.color}22`; // eslint-disable-line no-param-reassign
+          const opacity = Math.round(polygon.opacity * 255).toString(16);
+          context.fillStyle = `${polygon.color}${opacity}`; // eslint-disable-line no-param-reassign
           context.strokeStyle = polygon.color; // eslint-disable-line no-param-reassign, max-len
           context.setLineDash(
             polygon.lineDash || state.config?.polygon?.lineDash || [],
