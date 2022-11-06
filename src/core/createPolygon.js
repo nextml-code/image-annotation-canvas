@@ -6,6 +6,7 @@ const createPolygon = (state) => ({
   coordinates: [],
   visible: true,
   color: getUIColor(state),
+  showTextBoxes: state?.config?.showTextBoxes,
 });
 
 export default createPolygon;
