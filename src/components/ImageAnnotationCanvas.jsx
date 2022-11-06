@@ -20,7 +20,6 @@ const ImageAnnotationCanvas = ({
   }, [state]);
 
   useEffect(() => {
-    console.log("hello, world");
     dispatch({ type: INITIATE_CONFIG, payload: config });
   }, []);
 

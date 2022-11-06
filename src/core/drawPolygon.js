@@ -32,7 +32,7 @@ const drawPolygon = (canvas, state) => (polygon, index) => {
         );
 
         // Draw index in the corner of the box
-        if (index !== undefined) {
+        if (state?.config?.showTextBoxes && index !== undefined) {
           const [{ x, y }] = coordinates;
           const numberText = index.toString();
 
