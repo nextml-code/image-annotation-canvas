@@ -15,7 +15,10 @@ import mouseDown from "./mouseDown";
 import mouseMove from "./mouseMove";
 import mouseUp from "./mouseUp";
 
-const eventHandler = (state, dispatch, allowEdit) => (event) => {
+const eventHandler = (state, dispatch, allowEdit, eventCallback) => (event) => {
+  if (eventCallback !== undefined) {
+    eventCallback(event);
+  }
   if (!allowEdit) {
     return;
   }

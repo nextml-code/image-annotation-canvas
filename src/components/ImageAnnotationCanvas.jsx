@@ -12,6 +12,7 @@ const ImageAnnotationCanvas = ({
   allowEdit,
   completeAnnotationOn,
   config,
+  eventCallback,
 }) => {
   useEffect(() => {
     if (completeAnnotationOn(state)) {
@@ -26,7 +27,11 @@ const ImageAnnotationCanvas = ({
 
   return (
     <CanvasContext.Provider value={{ state, dispatch }}>
-      <CanvasView imageSource={imageSource} allowEdit={allowEdit} />
+      <CanvasView
+        imageSource={imageSource}
+        allowEdit={allowEdit}
+        eventCallback={eventCallback}
+      />
     </CanvasContext.Provider>
   );
 };
