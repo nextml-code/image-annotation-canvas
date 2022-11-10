@@ -7,9 +7,10 @@ const createPolygon = (state) => ({
   visible: true,
   color: getUIColor(state),
   showTextBoxes: state?.config?.showTextBoxes,
-  opacity: state?.config?.defaultOpacity
-    ? state?.config?.defaultOpacity
-    : 0.135,
+  opacity:
+    state?.config?.defaultOpacity !== undefined
+      ? state?.config?.defaultOpacity
+      : 0.135,
 });
 
 export default createPolygon;
