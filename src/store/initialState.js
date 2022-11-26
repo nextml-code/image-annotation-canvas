@@ -14,4 +14,6 @@ export default Object.freeze({
   config: {
     colors: defaultUIColors,
   },
+  canvasZoom: 1.0,
+  canvasIsDragging: false,
 });

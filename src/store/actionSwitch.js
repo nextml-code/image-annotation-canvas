@@ -10,6 +10,7 @@ import {
   POP_ANNOTATION,
   POP_COORDINATE,
   INITIATE_CONFIG,
+  SET_CANVAS_ZOOM,
 } from "./actionTypes";
 import addPolygonCoordinate from "./actions/addPolygonCoordinate";
 import selectPoint from "./actions/selectPoint";
@@ -115,6 +116,12 @@ const actionSwitch = (state, action) => {
             ),
           };
         }),
+      };
+    }
+    case SET_CANVAS_ZOOM: {
+      return {
+        ...state,
+        canvasZoom: action,
       };
     }
 

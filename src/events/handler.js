@@ -6,6 +6,7 @@ import {
   MOUSE_UP,
   DOUBLE_CLICK,
   KEY_DOWN,
+  WHEEL,
 } from "./eventTypes";
 import { COMBINE, FINISH_POLYGON, POP_COORDINATE } from "../store/actionTypes";
 
@@ -14,6 +15,7 @@ import keyUp from "./keyUp";
 import mouseDown from "./mouseDown";
 import mouseMove from "./mouseMove";
 import mouseUp from "./mouseUp";
+import wheel from "./wheel";
 
 const eventHandler = (state, dispatch, allowEdit, eventCallback) => (event) => {
   if (eventCallback !== undefined) {
@@ -55,6 +57,10 @@ const eventHandler = (state, dispatch, allowEdit, eventCallback) => (event) => {
     case KEY_UP: {
       keyUp(state, dispatch, event);
       break;
+    }
+
+    case WHEEL: {
+      wheel(state, dispatch, event);
     }
 
     default: {

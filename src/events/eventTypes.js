@@ -5,3 +5,4 @@ export const MOUSE_DOWN = "mousedown";
 export const MOUSE_UP = "mouseup";
 export const DOUBLE_CLICK = "dblclick";
 export const KEY_DOWN = "keydown";
+export const WHEEL = "wheel";
