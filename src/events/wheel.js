@@ -1,7 +1,6 @@
 import { SET_CANVAS_ZOOM } from "../store/actionTypes";
-import getContext from "../core/getContext";
 
-const SCROLL_SENSITIVITY = 0.0001;
+const SCROLL_SENSITIVITY = 0.0005;
 
 const wheel = (state, dispatch, event) => {
   adjustZoom(state, dispatch, event.deltaY * SCROLL_SENSITIVITY);

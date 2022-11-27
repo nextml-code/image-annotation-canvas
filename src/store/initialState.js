@@ -15,5 +15,9 @@ export default Object.freeze({
     colors: defaultUIColors,
   },
   canvasZoom: 1.0,
+  lastCanvasZoom: 1.0,
   canvasIsDragging: false,
+  canvasOffset: { x: 0, y: 0 },
+  canvasDragStart: { x: 0, y: 0 },
+  initialPinchDistance: null,
 });

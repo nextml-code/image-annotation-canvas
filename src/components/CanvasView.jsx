@@ -15,30 +15,28 @@ const CanvasView = ({ imageSource, allowEdit, eventCallback }) => {
   useCanvasRenderUpdate(state, canvas, allowEdit);
   useImageLoader(imageSource);
 
-  // useEffect(() => {
-  //   const ctx = getContext(canvas);
-  //   if (canvas !== undefined && ctx !== undefined) {
-  //     ctx.translate(
-  //       state.canvasDimensions.width / 2,
-  //       state.canvasDimensions.height / 2,
-  //     );
-  //   }
-  // }, [canvas, state.canvasDimensions]);
-
   useEffect(() => {
     const ctx = getContext(canvas);
     if (canvas !== undefined && ctx !== undefined) {
-      // ctx.translate(
-      //   state.canvasDimensions.width / 2,
-      //   state.canvasDimensions.height / 2,
-      // );
-      // ctx.scale(state.canvasZoom, state.canvasZoom);
-      ctx.setTransform(state.canvasZoom, 0, 0, state.canvasZoom, 0, 0);
+      ctx.setTransform(
+        state.canvasZoom,
+        0,
+        0,
+        state.canvasZoom,
+        state.canvasDimensions.width / 2,
+        state.canvasDimensions.height / 2,
+      );
+      ctx.translate(
+        -state.canvasDimensions.width / 2 + state.canvasOffset.x,
+        -state.canvasDimensions.height / 2 + state.canvasOffset.y,
+      );
     }
-  }, [canvas, state.canvasZoom]);
+  }, [canvas, state.canvasZoom, state.canvasOffset]);
+
+  document.body.style.overflow = "hidden";
 
   return (
-    <>
+    <div>
       <MetaCanvas />
       <Canvas
         onInit={onCanvasInit(setCanvas)}
@@ -46,7 +44,7 @@ const CanvasView = ({ imageSource, allowEdit, eventCallback }) => {
         cursor={state.cursor}
         dimensions={state.canvasDimensions}
       />
-    </>
+    </div>
   );
 };
 

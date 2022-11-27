@@ -15,57 +15,75 @@ import keyUp from "./keyUp";
 import mouseDown from "./mouseDown";
 import mouseMove from "./mouseMove";
 import mouseUp from "./mouseUp";
+import mouseDownNoEdit from "./mouseDownNoEdit";
+import mouseMoveNoEdit from "./mouseMoveNoEdit";
+import mouseUpNoEdit from "./mouseUpNoEdit";
 import wheel from "./wheel";
 
 const eventHandler = (state, dispatch, allowEdit, eventCallback) => (event) => {
   if (eventCallback !== undefined) {
     eventCallback(event);
   }
+
   if (!allowEdit) {
-    return;
-  }
-
-  switch (event.type) {
-    case DOUBLE_CLICK: {
-      dispatch({
-        type: COMBINE,
-        payload: [{ type: POP_COORDINATE }, { type: FINISH_POLYGON }],
-      });
-      break;
+    switch (event.type) {
+      case MOUSE_DOWN: {
+        mouseDownNoEdit(state, dispatch, event);
+        break;
+      }
+      case MOUSE_MOVE: {
+        mouseMoveNoEdit(state, dispatch, event);
+        break;
+      }
+      case MOUSE_UP: {
+        mouseUpNoEdit(state, dispatch);
+        break;
+      }
+      case WHEEL: {
+        wheel(state, dispatch, event);
+      }
+      default: {
+      }
     }
+  } else {
+    switch (event.type) {
+      case DOUBLE_CLICK: {
+        dispatch({
+          type: COMBINE,
+          payload: [{ type: POP_COORDINATE }, { type: FINISH_POLYGON }],
+        });
+        break;
+      }
 
-    case MOUSE_DOWN: {
-      mouseDown(state, dispatch, event);
-      break;
-    }
+      case MOUSE_DOWN: {
+        mouseDown(state, dispatch, event);
+        break;
+      }
 
-    case MOUSE_UP: {
-      mouseUp(dispatch);
-      break;
-    }
+      case MOUSE_UP: {
+        mouseUp(dispatch);
+        break;
+      }
 
-    case MOUSE_MOVE: {
-      mouseMove(state, dispatch, getCanvasMousePosition(event));
-      break;
-    }
+      case MOUSE_MOVE: {
+        mouseMove(state, dispatch, getCanvasMousePosition(event));
+        break;
+      }
 
-    case KEY_DOWN: {
-      keyDown(state, dispatch, event);
-      break;
-    }
+      case KEY_DOWN: {
+        keyDown(state, dispatch, event);
+        break;
+      }
 
-    case KEY_UP: {
-      keyUp(state, dispatch, event);
-      break;
-    }
+      case KEY_UP: {
+        keyUp(state, dispatch, event);
+        break;
+      }
 
-    case WHEEL: {
-      wheel(state, dispatch, event);
-    }
-
-    default: {
-      // If none of the above events happen
-      // we should do absolutely nothing...
+      default: {
+        // If none of the above events happen
+        // we should do absolutely nothing...
+      }
     }
   }
 };

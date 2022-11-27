@@ -11,6 +11,11 @@ import {
   POP_COORDINATE,
   INITIATE_CONFIG,
   SET_CANVAS_ZOOM,
+  SET_CANVAS_IS_DRAGGING,
+  SET_CANVAS_OFFSET,
+  SET_CANVAS_DRAG_START,
+  SET_INITIAL_PINCH_DISTANCE,
+  SET_LAST_CANVAS_ZOOM,
 } from "./actionTypes";
 import addPolygonCoordinate from "./actions/addPolygonCoordinate";
 import selectPoint from "./actions/selectPoint";
@@ -122,6 +127,36 @@ const actionSwitch = (state, action) => {
       return {
         ...state,
         canvasZoom: action,
+      };
+    }
+    case SET_CANVAS_IS_DRAGGING: {
+      return {
+        ...state,
+        canvasIsDragging: action,
+      };
+    }
+    case SET_CANVAS_OFFSET: {
+      return {
+        ...state,
+        canvasOffset: action,
+      };
+    }
+    case SET_CANVAS_DRAG_START: {
+      return {
+        ...state,
+        canvasDragStart: action,
+      };
+    }
+    case SET_INITIAL_PINCH_DISTANCE: {
+      return {
+        ...state,
+        initialPinchDistance: action,
+      };
+    }
+    case SET_LAST_CANVAS_ZOOM: {
+      return {
+        ...state,
+        lastCanvasZoom: action,
       };
     }
 
