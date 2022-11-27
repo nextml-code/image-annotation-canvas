@@ -7,6 +7,9 @@ import {
   DOUBLE_CLICK,
   KEY_DOWN,
   WHEEL,
+  TOUCH_START,
+  TOUCH_END,
+  TOUCH_MOVE,
 } from "./eventTypes";
 import { COMBINE, FINISH_POLYGON, POP_COORDINATE } from "../store/actionTypes";
 
@@ -19,6 +22,7 @@ import mouseDownNoEdit from "./mouseDownNoEdit";
 import mouseMoveNoEdit from "./mouseMoveNoEdit";
 import mouseUpNoEdit from "./mouseUpNoEdit";
 import wheel from "./wheel";
+import handleTouch from "./handleTouch";
 
 const eventHandler = (state, dispatch, allowEdit, eventCallback) => (event) => {
   if (eventCallback !== undefined) {
@@ -31,12 +35,24 @@ const eventHandler = (state, dispatch, allowEdit, eventCallback) => (event) => {
         mouseDownNoEdit(state, dispatch, event);
         break;
       }
+      case TOUCH_START: {
+        handleTouch(state, dispatch, event, mouseDownNoEdit);
+        break;
+      }
       case MOUSE_MOVE: {
         mouseMoveNoEdit(state, dispatch, event);
         break;
       }
+      case TOUCH_MOVE: {
+        handleTouch(state, dispatch, event, mouseMoveNoEdit);
+        break;
+      }
       case MOUSE_UP: {
         mouseUpNoEdit(state, dispatch);
+        break;
+      }
+      case TOUCH_END: {
+        handleTouch(state, dispatch, event, mouseUpNoEdit);
         break;
       }
       case WHEEL: {

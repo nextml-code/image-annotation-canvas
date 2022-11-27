@@ -6,3 +6,6 @@ export const MOUSE_UP = "mouseup";
 export const DOUBLE_CLICK = "dblclick";
 export const KEY_DOWN = "keydown";
 export const WHEEL = "wheel";
+export const TOUCH_START = "touchstart";
+export const TOUCH_END = "touchend";
+export const TOUCH_MOVE = "touchmove";
