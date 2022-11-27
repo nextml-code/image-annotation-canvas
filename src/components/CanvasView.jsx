@@ -33,7 +33,9 @@ const CanvasView = ({ imageSource, allowEdit, eventCallback }) => {
     }
   }, [canvas, state.canvasZoom, state.canvasOffset]);
 
-  document.body.style.overflow = "hidden";
+  if (allowEdit) {
+    document.body.style.overflow = "hidden";
+  }
 
   return (
     <div>
